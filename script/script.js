@@ -1,22 +1,18 @@
 const watchedState = new Proxy({
   productList: [],
+  currentProduct: null,
+  searchValue: '',
   isModalOpen: false,
   isLoaderOpen: false
 }, {
   set: (target, prop, value) => {
     target[prop] = value
 
-    if (prop === 'productList') {
-      renderProducts(target[prop])
-    }
-
-    if (prop === 'isLoaderOpen') {
-      loaderRender(value)
-    }
-
-    if (prop === 'isModalOpen') {
-      toggleModalVisibility(value)
-    }
+    if (prop === 'productList') renderProducts(value)
+    if (prop === 'currentProduct') updateModalContent(value)
+    if (prop === 'searchValue') renderProducts()
+    if (prop === 'isLoaderOpen') loaderRender(value)
+    if (prop === 'isModalOpen') toggleModalVisibility(value)
 
     return true
   }
@@ -28,7 +24,6 @@ const fetchProducts = async () => {
     const response = await fetch('https://fakestores.onrender.com/api/products')
     const products = await response.json()
     watchedState.productList = products.slice(0, 10)
-    renderProducts(watchedState.productList)
   } catch (error) {
     console.error('Ошибка', error)
   } finally {
@@ -36,54 +31,58 @@ const fetchProducts = async () => {
   }
 }
 
-const renderProducts = (products) => {
+const renderProducts = () => {
   const productContainer = document.querySelector('.products-list')
   productContainer.innerHTML = ''
 
-  products.forEach((product) => {
-    const liElement = document.createElement('li')
-    liElement.classList.add('products-list__item')
-    liElement.id = product.id
+  watchedState.productList
+    .filter(product => product.title.toLowerCase().includes(watchedState.searchValue))
+    .forEach((product) => {
+      const liElement = document.createElement('li')
+      liElement.classList.add('products-list__item')
+      liElement.id = product.id
 
-    const title = document.createElement('h1')
-    title.classList.add('products-list__title')
-    title.textContent = product.title
+      const title = document.createElement('h1')
+      title.classList.add('products-list__title')
+      title.textContent = product.title
 
-    const img = document.createElement('img')
-    img.classList.add('products-list__image')
-    img.src = product.imageURL
-    img.width = '170'
-    img.height = '170'
-    img.alt = product.title
+      const img = document.createElement('img')
+      img.classList.add('products-list__image')
+      img.src = product.imageURL
+      img.width = '170'
+      img.height = '170'
+      img.alt = product.title
 
-    const descriptionContainer = document.createElement('div')
-    descriptionContainer.classList.add('products-list__description-wrapper')
+      const descriptionContainer = document.createElement('div')
+      descriptionContainer.classList.add('products-list__description-wrapper')
 
-    const description = document.createElement('span')
-    description.classList.add('products-list__description')
-    description.textContent = product.description
+      const description = document.createElement('span')
+      description.classList.add('products-list__description')
+      description.textContent = product.description
 
-    const openModalButton = document.createElement('button')
-    openModalButton.classList.add('products-list__detail-button')
-    openModalButton.setAttribute('data-id', product.id)
-    openModalButton.textContent = 'подробнее'
-    openModalButton.setAttribute('data-id', product.id)
+      const openModalButton = document.createElement('button')
+      openModalButton.classList.add('products-list__detail-button')
+      openModalButton.setAttribute('data-id', product.id)
+      openModalButton.textContent = 'подробнее'
 
-    const price = document.createElement('span')
-    price.classList.add('products-list__price')
-    price.textContent = `$ ${product.price}`
+      const price = document.createElement('span')
+      price.classList.add('products-list__price')
+      price.textContent = `$ ${product.price}`
 
-    const button = document.createElement('button')
-    button.classList.add('products-list__button')
-    button.classList.add('button')
-    button.textContent = 'Купить'
+      const button = document.createElement('button')
+      button.classList.add('products-list__button')
+      button.classList.add('button')
+      button.textContent = 'Купить'
 
-    descriptionContainer.append(description, openModalButton)
-    liElement.append(title, img, descriptionContainer, price, button)
-    productContainer.append(liElement)
+      descriptionContainer.append(description, openModalButton)
+      liElement.append(title, img, descriptionContainer, price, button)
+      productContainer.append(liElement)
 
-    openModalButton.addEventListener('click', () => toggleModal(product))
-  })
+      openModalButton.addEventListener('click', () => {
+        watchedState.currentProduct = product
+        watchedState.isModalOpen = true
+      })
+    })
 }
 
 const updateModalContent = (product) => {
@@ -99,11 +98,6 @@ const updateModalContent = (product) => {
   description.textContent = product.description
   price.textContent = `$ ${product.price}`
   button.textContent = 'Купить'
-}
-
-const toggleModal = (product) => {
-  updateModalContent(product)
-  watchedState.isModalOpen = true
 }
 
 const toggleModalVisibility = (isVisible) => {
@@ -139,11 +133,7 @@ const loaderRender = (isLoading) => {
 
 const handleSearch = (e) => {
   const inputValue = e.target.value.toLowerCase()
-  const filteredProducts = watchedState.productList.filter((product) => {
-    return product.title.toLowerCase().includes(inputValue)
-  })
-
-  renderProducts(filteredProducts)
+  watchedState.searchValue = inputValue
 }
 
 const inputSearch = document.querySelector('.header__search')
