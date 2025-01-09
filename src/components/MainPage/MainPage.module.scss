@@ -1,0 +1,15 @@
+@import '../../styles/globals.scss';
+
+.header {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.cardsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 50px;
+  height: calc(100vh - 82px)
+}

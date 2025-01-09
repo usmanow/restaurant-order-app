@@ -1,0 +1,18 @@
+@import '../../styles/globals.scss';
+
+.button {
+  width: 200px;
+  height: 42px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.21;
+  color: $color-text-light;
+  border: 1px solid $color-accent;
+  transition: border-color, background-color, color, $transition;
+
+  &:hover {
+    border-color: $color-bg;
+    background-color: $color-accent;
+    color: $color-bg;
+  }
+}
