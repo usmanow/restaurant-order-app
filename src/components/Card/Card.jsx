@@ -1,5 +1,5 @@
 import './Card.css'
-import image from '../assets/images/product-1.png'
+import image from '../../assets/images/product-1.png'
 
 const Card = () => {
   return (
