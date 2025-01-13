@@ -11,7 +11,7 @@ const MainPage = () => {
   const handleCloseModal = () => setIsModalOpen(false)
 
   return (
-    <div className={styles.homePage}>
+    <>
       <div className={styles.header}>
         <Button
           title='Open Modal'
@@ -40,7 +40,7 @@ const MainPage = () => {
       >
         Модальное окно
       </Modal>
-    </div>
+    </>
   )
 }
 
