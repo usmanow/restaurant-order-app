@@ -1,4 +1,3 @@
-import React from 'react'
 import CartActionButton from '../UI/CartActionButton'
 import styles from './Card.module.scss'
 
