@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './CartActionButton.module.scss'
 
 const CartActionButton = ({onClick, buttonRemove, iconRemove}) => {
