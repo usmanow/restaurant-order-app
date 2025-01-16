@@ -10,8 +10,8 @@ const Modal = ({ isOpen, onClose, children }) => {
       <div className={styles.inner}>
         <CartActionButton
           onClick={onClose}
-          buttonRemove={styles.buttonRemove}
-          iconRemove={styles.iconRemove}
+          buttonType='remove'
+          buttonTypeLine='remove'
         />
         <h2 className={styles.title}>{children}</h2>
       </div>

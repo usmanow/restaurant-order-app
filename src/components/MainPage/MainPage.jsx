@@ -19,7 +19,7 @@ const MainPage = () => {
         />
       </div>
 
-      <div className={styles.cardsContainer}>
+      <div className={styles['cards-container']}>
         <Card
           image='product-1.png'
           title='Устрицы по рокфеллеровски'
