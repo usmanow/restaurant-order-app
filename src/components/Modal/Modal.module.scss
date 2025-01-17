@@ -1,0 +1,31 @@
+@import '../../styles/globals.scss';
+
+.modal {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inset: 0;
+  z-index: 1;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: #FFFFFF66;
+}
+
+.inner {
+  position: relative;
+  padding: 20px;
+  min-width: 900px;
+  min-height: 700px;
+  background-color: $color-text-light;
+  border-radius: 10px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.22;
+}

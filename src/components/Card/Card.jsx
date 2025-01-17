@@ -1,20 +1,22 @@
-import './Card.css'
-import image from '../../assets/images/product-1.png'
+import CartActionButton from '../UI/CartActionButton'
+import styles from './Card.module.scss'
 
-const Card = () => {
+const Card = ({ image, title, description, price }) => {
   return (
-    <div className="card">
-      <h2 className="card__title">Наименование товара</h2>
+    <div className={styles.card}>
       <img
-        className="card__image"
-        src={ image }
-        width='170'
-        height='170'
-        alt="product"
+        className={styles.image}
+        src={require(`../../assets/images/${image}`)}
+        width='270'
+        height='271'
+        alt={title}
       />
-      <p className="card__description">Описание товара</p>
-      <span className="card__price">Цена товара</span>
-      <button className="card__button">Купить</button>
+      <h2 className={styles.title}>{title}</h2>
+      <p className={styles.description}>{description}</p>
+      <div className={styles.purchase}>
+        <span className={styles.price}>{price}</span>
+        <CartActionButton />
+      </div>
     </div>
   )
 }

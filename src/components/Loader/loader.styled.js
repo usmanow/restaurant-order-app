@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components'
 
 const spinnerAnimation = keyframes`
   0% {
@@ -7,8 +7,8 @@ const spinnerAnimation = keyframes`
 
   100% {
     opacity: 0;
-  };
-`;
+  }
+`
 
 const LoaderContainer = styled.div`
   display: inline-block;
@@ -44,6 +44,6 @@ const LoaderContainer = styled.div`
       animation-delay: -${(11 - i) * 0.1}s;
     }
   `).join('')}
-`;
+`
 
 export default LoaderContainer
