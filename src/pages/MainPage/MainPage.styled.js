@@ -1,4 +1,4 @@
-@import '../../styles/globals.scss';
+/* @import '../../styles/globals.scss';
 
 .header {
   display: flex;
@@ -12,4 +12,4 @@
   justify-content: center;
   column-gap: 50px;
   height: calc(100vh - 82px)
-}
+} */

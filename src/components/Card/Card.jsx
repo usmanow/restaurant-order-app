@@ -1,4 +1,4 @@
-import CartActionButton from '../UI/CartActionButton'
+/* import CartActionButton from '../../icons/CartActionButton/CartActionButton'
 import styles from './Card.module.scss'
 
 const Card = ({ image, title, description, price }) => {
@@ -21,4 +21,4 @@ const Card = ({ image, title, description, price }) => {
   )
 }
 
-export default Card
+export default Card */

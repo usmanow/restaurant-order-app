@@ -1,9 +1,15 @@
-import MainPage from './components/MainPage/MainPage'
+import GlobalStyles from './styles/GlobalStyles.styled'
+import Header from './layouts/header/Header'
+import Main from './layouts/main/Main'
+import Footer from './layouts/footer/Footer'
 
-const App =() => {
+const App = () => {
   return (
     <>
-      <MainPage/>
+      <GlobalStyles />
+      <Header />
+      <Main />
+      <Footer />
     </>
   )
 }
