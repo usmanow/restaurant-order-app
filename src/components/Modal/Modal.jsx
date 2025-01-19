@@ -1,4 +1,4 @@
-import CartActionButton from '../UI/CartActionButton'
+/* import CartActionButton from '../../icons/CartActionButton/CartActionButton'
 import styles from './Modal.module.scss'
 
 const Modal = ({ isOpen, onClose, children }) => {
@@ -19,4 +19,4 @@ const Modal = ({ isOpen, onClose, children }) => {
   )
 }
 
-export default Modal
+export default Modal */

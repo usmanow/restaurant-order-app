@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components'
+/* import styled, { keyframes } from 'styled-components'
 
 const spinnerAnimation = keyframes`
   0% {
@@ -46,4 +46,4 @@ const LoaderContainer = styled.div`
   `).join('')}
 `
 
-export default LoaderContainer
+export default LoaderContainer */
