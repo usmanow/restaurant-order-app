@@ -1,9 +1,11 @@
 import styled from 'styled-components'
 import variables from '../../styles/variables'
 
+const { colors, borders } = variables
+
 export const StyledFooter = styled.footer`
-  border-top: ${variables.borders.default};
-  background-color: ${variables.colors.darkBg};
+  border-top: ${borders.default};
+  background-color: ${colors.darkBg};
 
   .inner {
     display: flex;
@@ -27,6 +29,6 @@ export const StyledFooter = styled.footer`
 
   .order-price {
     font-size: 18px;
-    color: ${variables.colors.accent};
+    color: ${colors.accent};
   }
 `

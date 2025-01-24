@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import variables from '../../styles/variables'
 
+const { colors, transitions, hovers } = variables
+
 export const StyledCartButton = styled.button`
   position: relative;
   display: flex;
@@ -9,10 +11,10 @@ export const StyledCartButton = styled.button`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: ${variables.colors.accent};
-  transition: opacity ${variables.transitions.default};
+  background-color: ${colors.accent};
+  transition: opacity ${transitions.default};
 
   &:hover {
-    opacity: ${variables.hovers.default}
+    opacity: ${hovers.default}
   }
 `

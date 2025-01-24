@@ -1,10 +1,15 @@
 const variables = {
+  fonts: {
+    base: "'Montserrat', sans-serif",
+  },
+
   colors: {
     darkBg: '#161516',
     lightText: '#FFFFFF',
     darkText: '#131212',
     accent: '#D58C51',
-    error: '#FF0A0A'
+    error: '#FF0A0A',
+    disabledButton: '#3C3C3C'
   },
 
   hovers: {
@@ -14,10 +19,6 @@ const variables = {
   borders: {
     default: '1px solid #D58C51',
     light: '1px solid #FFFFFF',
-  },
-
-  fonts: {
-    base: "'Montserrat', sans-serif",
   },
 
   transitions: {

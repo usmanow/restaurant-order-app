@@ -1,12 +1,11 @@
 import { StyledButton } from './Button.styled'
 
-const Button = ({ children, bcgColor, textColor, hoverBсgColor, hoverColor }) => {
+const Button = ({ children, buttonType, type, disabled }) => {
   return (
     <StyledButton
-      bcgColor={bcgColor}
-      textColor={textColor}
-      hoverBсgColor={hoverBсgColor}
-      hoverColor={hoverColor}
+      $buttonType={buttonType}
+      type={type}
+      disabled={disabled}
     >
       {children}
     </StyledButton>

@@ -1,15 +1,15 @@
 import GlobalStyles from './styles/GlobalStyles.styled'
-import Header from './layouts/header/Header'
-import Main from './layouts/main/Main'
-import Footer from './layouts/footer/Footer'
+// import MainPage from './pages/MainPage/MainPage'
+import RegForm from './components/RegForm/RegForm'
+import LoginForm from './components/LoginForm/LoginForm'
 
 const App = () => {
   return (
     <>
       <GlobalStyles />
-      <Header />
-      <Main />
-      <Footer />
+      <LoginForm />
+      <RegForm />
+      {/* <MainPage /> */}
     </>
   )
 }
