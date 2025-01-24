@@ -1,24 +1,26 @@
-/* import CartActionButton from '../../icons/CartActionButton/CartActionButton'
-import styles from './Card.module.scss'
+import CartActionButton from '../../ui/CartActionButton/CartActionButton'
+import { StyledCard } from './Card.styled'
 
-const Card = ({ image, title, description, price }) => {
+const Card = ({ preview, title, description, price }) => {
   return (
-    <div className={styles.card}>
+    <StyledCard>
       <img
-        className={styles.image}
-        src={require(`../../assets/images/${image}`)}
+        className="image"
+        src={require(`../../assets/images/${preview}`)}
         width='270'
         height='271'
         alt={title}
       />
-      <h2 className={styles.title}>{title}</h2>
-      <p className={styles.description}>{description}</p>
-      <div className={styles.purchase}>
-        <span className={styles.price}>{price}</span>
-        <CartActionButton />
+      <h2 className="title">{title}</h2>
+      <p className="description">{description}</p>
+      <div className="purchase">
+        <span className="price">{price}</span>
+
+        <CartActionButton/>
+
       </div>
-    </div>
+    </StyledCard>
   )
 }
 
-export default Card */
+export default Card

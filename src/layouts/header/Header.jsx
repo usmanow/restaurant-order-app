@@ -1,7 +1,6 @@
 import Button from '../../ui/Button/Button'
 import CartButton from '../../ui/CartButton/CartButton'
 import { StyledHeader } from './Header.styled'
-import variables from '../../styles/variables'
 
 const Header = () => {
   return (
@@ -18,10 +17,8 @@ const Header = () => {
           <CartButton />
           <Button
             children='Выйти'
-            bcgColor={variables.colors.darkBg}
-            textColor={variables.colors.accent}
-            hoverBсgColor={variables.colors.accent}
-            hoverColor={variables.colors.darkText}
+            buttonType='logOut'
+            type='button'
           />
 
         </div>

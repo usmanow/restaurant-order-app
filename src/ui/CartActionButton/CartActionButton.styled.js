@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import variables from '../../styles/variables'
 
+const { colors, borders, transitions } = variables
+
 export const StyledCartActionButton = styled.button`
   display: flex;
   align-items: center;
@@ -8,19 +10,19 @@ export const StyledCartActionButton = styled.button`
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  border: ${variables.borders.light};
-  transition: border-color, background-color ${variables.transitions.default};
+  border: ${borders.light};
+  transition: border-color, background-color ${transitions.default};
 
   &:hover {
-    border-color: ${variables.colors.accent};
-    background-color: ${variables.colors.accent};
+    border-color: ${colors.accent};
+    background-color: ${colors.accent};
   }
 
   .line {
     position: relative;
     width: 12px;
     height: 2px;
-    background-color: ${variables.colors.lightText};
+    background-color: ${colors.lightText};
 
     &::before {
       position: absolute;
@@ -30,7 +32,7 @@ export const StyledCartActionButton = styled.button`
       transform: translate(-50%, -50%) rotate(180deg);
       width: 2px;
       height: 12px;
-      background-color: ${variables.colors.lightText};
+      background-color: ${colors.lightText};
     }
   }
 `

@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 import variables from './variables'
-import Fonts from './fonts'
-import Reset from './reset'
+import Fonts from './Fonts.styled'
+import Reset from './Reset.styled'
 
 const GlobalStyles = createGlobalStyle`
   ${Fonts}

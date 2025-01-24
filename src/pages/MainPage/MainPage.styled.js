@@ -1,3 +1,11 @@
+/* import styled from 'styled-components'
+import variables from '../../styles/variables' */
+
+/* export const StyledMainPage = styled.main`
+  height: calc(100vh - 251px);
+  background-color: ${variables.colors.darkBg};
+` */
+
 /* @import '../../styles/globals.scss';
 
 .header {

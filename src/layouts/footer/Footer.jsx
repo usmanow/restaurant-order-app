@@ -1,6 +1,5 @@
 import Button from '../../ui/Button/Button'
 import { StyledFooter } from './Footer.styled'
-import variables from '../../styles/variables'
 
 const Footer = () => {
   return (
@@ -12,10 +11,8 @@ const Footer = () => {
         </div>
         <Button
           children='Оформить заказ'
-          bcgColor={variables.colors.accent}
-          textColor={variables.colors.darkText}
-          hoverBсgColor={variables.colors.darkBg}
-          hoverColor={variables.colors.accent}
+          buttonType='placeOrder'
+          type='submit'
         />
       </div>
     </StyledFooter>

@@ -1,4 +1,5 @@
-/* import styled, { keyframes } from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+import variables from '../../styles/variables'
 
 const spinnerAnimation = keyframes`
   0% {
@@ -15,7 +16,7 @@ const LoaderContainer = styled.div`
   position: relative;
   width: 80px;
   height: 80px;
-  color: #1c4c5b;
+  color: ${variables.colors.accent};
 
   div, div:after {
     box-sizing: border-box;
@@ -46,4 +47,4 @@ const LoaderContainer = styled.div`
   `).join('')}
 `
 
-export default LoaderContainer */
+export default LoaderContainer

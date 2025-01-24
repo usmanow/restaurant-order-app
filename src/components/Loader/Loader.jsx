@@ -1,4 +1,4 @@
-/* import LoaderContainer from './loader.styled'
+import LoaderContainer from './loader.styled'
 
 const Loader = () => {
   return (
@@ -10,4 +10,4 @@ const Loader = () => {
   )
 }
 
-export default Loader */
+export default Loader
