@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import variables from '../../styles/variables'
 
 export const StyledMain = styled.main`
-  height: calc(100vh - 251px);
+  height: ${(props) => (props.$mainType === 'cart' ? 'calc(100vh - 251px)' : 'calc(100vh - 158px)')};
   background-color: ${variables.colors.darkBg};
   overflow: auto;
   scrollbar-width: none;

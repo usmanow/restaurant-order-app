@@ -1,14 +1,40 @@
 import styled from 'styled-components'
 import variables from '../../styles/variables'
 
+const { colors, borders, transitions } = variables
+
 export const StyledHeader = styled.header`
-  background-color: ${variables.colors.darkBg};
+  background-color: ${colors.darkBg};
 
   .inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-block: 54px;
+  }
+
+  .arrow-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: ${borders.default};
+    background-color: ${colors.darkBg};
+    transition: background-color ${transitions.default};
+
+    svg path {
+      transition: fill ${transitions.default};
+    }
+
+    &:hover {
+      background-color: ${colors.accent};
+
+      svg path {
+        fill: ${colors.lightText};
+      }
+    }
   }
 
   .title {
@@ -47,7 +73,8 @@ export const StyledHeader = styled.header`
     max-height: 22px;
     max-width: 22px;
     font-size: 15px;
-    background-color: ${variables.colors.accent};
+    background-color: ${colors.accent};
     border-radius: 50%;
+    color: ${colors.lightText};
   }
 `

@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router'
 import Input from '../Input/Input'
 import Button from '../../ui/Button/Button'
 import { StyledLoginForm } from './LoginForm.styled'
 import errorMessages from '../../data/errorMessages'
 
-const LoginForm = () => {
+const LoginForm = ({ toggleForm }) => {
   const [formValues, setFormValues] = useState({
     email: '',
     password: '',
@@ -69,43 +70,43 @@ const LoginForm = () => {
   }
 
   return (
-    <StyledLoginForm>
-      <form className="form" method='POST' noValidate onSubmit={submitHandler}>
-        <button className="toggle-form-btn" type='button'>Зарегистрироваться</button>
-        <h1 className="title">Вход</h1>
+    <StyledLoginForm method='POST' noValidate onSubmit={submitHandler}>
+      <button className="toggle-form-btn" type='button' onClick={toggleForm}>Зарегистрироваться</button>
+      <h1 className="title">Вход</h1>
 
-        <div className="field-wrapper">
-          <Input
-            value={formValues.email}
-            onChange={inputChangeHandler}
-            name='email'
-            placeholder='Email'
-            type='text'
-            autoComplete='off'
-          />
-          <span className="error error_email">{errors.email}</span>
+      <div className="field-wrapper">
+        <Input
+          value={formValues.email}
+          onChange={inputChangeHandler}
+          name='email'
+          placeholder='Email'
+          type='text'
+          autoComplete='off'
+        />
+        <span className="error error_email">{errors.email}</span>
 
-          <Input
-            value={formValues.password}
-            onChange={inputChangeHandler}
-            name='password'
-            placeholder='Пароль'
-            type='password'
-            autoComplete='off'
-          />
-          <span className="error error_password">{errors.password}</span>
+        <Input
+          value={formValues.password}
+          onChange={inputChangeHandler}
+          name='password'
+          placeholder='Пароль'
+          type='password'
+          autoComplete='off'
+        />
+        <span className="error error_password">{errors.password}</span>
 
-        </div>
+      </div>
 
-        <span className="error error_general">{errors.general}</span>
+      <span className="error error_general">{errors.general}</span>
 
+      <Link to='/'>
         <Button
           children='Войти'
           buttonType='form'
           type='submit'
           disabled={!isFormValid}
         />
-      </form>
+      </Link>
     </StyledLoginForm>
   )
 }

@@ -4,7 +4,7 @@ import Button from '../../ui/Button/Button'
 import { StyledRegForm, CheckboxWrapper } from './RegForm.styled'
 import errorMessages from '../../data/errorMessages'
 
-const RegForm = () => {
+const RegForm = ({ toggleForm }) => {
   const [formValues, setFormValues] = useState({
     email: '',
     password: '',
@@ -97,75 +97,73 @@ const RegForm = () => {
     if (!isFormValid) return
 
     alert('Вы зарегистрированы')
+    toggleForm()
   }
 
   return (
-    <StyledRegForm>
-      <form className="form" method='POST' noValidate onSubmit={submitHandler}>
-        <button className="toggle-form-btn" type='button'>Авторизоваться</button>
+    <StyledRegForm method='POST' noValidate onSubmit={submitHandler}>
+      <button className="toggle-form-btn" type='button' onClick={toggleForm}>Авторизоваться</button>
 
-        <h1 className="title">Регистрация</h1>
+      <h1 className="title">Регистрация</h1>
 
-        <div className="field-wrapper">
-          <Input
-            value={formValues.email}
-            onChange={inputChangeHandler}
-            name='email'
-            placeholder='Email'
-            type='text'
-            autoComplete='off'
-          />
-          <span className="error error_email">{errors.email}</span>
+      <div className="field-wrapper">
+        <Input
+          value={formValues.email}
+          onChange={inputChangeHandler}
+          name='email'
+          placeholder='Email'
+          type='text'
+          autoComplete='off'
+        />
+        <span className="error error_email">{errors.email}</span>
 
-          <Input
-            value={formValues.password}
-            onChange={inputChangeHandler}
-            name='password'
-            placeholder='Пароль'
-            type='password'
-            autoComplete='off'
-          />
-          <span className="error error_password">{errors.password}</span>
+        <Input
+          value={formValues.password}
+          onChange={inputChangeHandler}
+          name='password'
+          placeholder='Пароль'
+          type='password'
+          autoComplete='off'
+        />
+        <span className="error error_password">{errors.password}</span>
 
-          <Input
-            value={formValues.passwordConfirm}
-            onChange={inputChangeHandler}
-            name='passwordConfirm'
-            placeholder='Подтвердите пароль'
-            type='password'
-            autoComplete='off'
-          />
-          <span className="error error_confirm">{errors.passwordConfirm}</span>
-        </div>
+        <Input
+          value={formValues.passwordConfirm}
+          onChange={inputChangeHandler}
+          name='passwordConfirm'
+          placeholder='Подтвердите пароль'
+          type='password'
+          autoComplete='off'
+        />
+        <span className="error error_confirm">{errors.passwordConfirm}</span>
+      </div>
 
-        <CheckboxWrapper>
-          <input
-            checked={formValues.agreed}
-            onChange={inputChangeHandler}
-            className="checkbox"
-            name='agreed'
-            type="checkbox"
-            id='checkbox'
-          />
-
-          <label className="label" htmlFor="checkbox">
-            <div className="custom-checkbox"></div>
-            Я согласен получать обновления на почту
-          </label>
-
-          <span className="error error_rules">{errors.agreed}</span>
-        </CheckboxWrapper>
-
-        <span className="error error_exists">{errors.userExists}</span>
-
-        <Button
-          children='Зарегистрироваться'
-          buttonType='form'
-          type='submit'
-          disabled={!isFormValid}
+      <CheckboxWrapper>
+        <input
+          checked={formValues.agreed}
+          onChange={inputChangeHandler}
+          className="checkbox"
+          name='agreed'
+          type="checkbox"
+          id='checkbox'
         />
 
-      </form>
+        <label className="label" htmlFor="checkbox">
+          <div className="custom-checkbox"></div>
+          Я согласен получать обновления на почту
+        </label>
+
+        <span className="error error_rules">{errors.agreed}</span>
+      </CheckboxWrapper>
+
+      <span className="error error_exists">{errors.userExists}</span>
+
+      <Button
+        children='Зарегистрироваться'
+        buttonType='form'
+        type='submit'
+        disabled={!isFormValid}
+      />
     </StyledRegForm>
   )
 }

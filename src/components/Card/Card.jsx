@@ -1,7 +1,7 @@
 import CartActionButton from '../../ui/CartActionButton/CartActionButton'
 import { StyledCard } from './Card.styled'
 
-const Card = ({ preview, title, description, price }) => {
+const Card = ({ title, preview, description, price }) => {
   return (
     <StyledCard>
       <img
