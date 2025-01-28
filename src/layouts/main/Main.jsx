@@ -5,9 +5,7 @@ import products from '../../data/products'
 
 const Main = ({ renderCards, mainType }) => {
   return (
-    <StyledMain
-      $mainType={mainType}
-    >
+    <StyledMain $mainType={mainType}>
       <div className="inner container">
         <ul className="product-list">
 

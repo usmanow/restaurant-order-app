@@ -1,5 +1,5 @@
 const errorMessages = {
-  loginRequired: 'Поле не должно быть пустым',
+  emailRequired: 'Поле не должно быть пустым',
   passwordRequired: 'Поле не должно быть пустым',
   passwordConfirmRequired: 'Поле не должно быть пустым',
   checkboxRequired: 'Вы должны согласиться на получение обновлений',

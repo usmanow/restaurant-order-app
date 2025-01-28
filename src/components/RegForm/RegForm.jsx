@@ -35,9 +35,9 @@ const RegForm = ({ toggleForm }) => {
   }
 
   const validateEmail = (email) => {
-    const emailRegex = new RegExp(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/, 'gi')
+    const emailRegex = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, '')
 
-    if (!email) return errorMessages.loginRequired
+    if (!email) return errorMessages.emailRequired
     if (!emailRegex.test(email)) return errorMessages.invalidEmail
     return ''
   }

@@ -2,6 +2,12 @@ import CartActionButton from '../../ui/CartActionButton/CartActionButton'
 import { StyledCard } from './Card.styled'
 
 const Card = ({ title, preview, description, price }) => {
+  const handleButtonClick = (e) => {
+    e.preventDefault()
+
+    console.log(`товар ${title} добавлен в корзину`)
+  }
+
   return (
     <StyledCard>
       <img
@@ -16,7 +22,7 @@ const Card = ({ title, preview, description, price }) => {
       <div className="purchase">
         <span className="price">{price}</span>
 
-        <CartActionButton/>
+        <CartActionButton onClick={handleButtonClick} />
 
       </div>
     </StyledCard>
