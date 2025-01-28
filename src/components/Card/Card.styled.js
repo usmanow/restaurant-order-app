@@ -11,6 +11,7 @@ export const StyledCard = styled.li`
   max-width: 312px;
   min-height: 552px;
   border: ${borders.default};
+  color: ${colors.lightText};
   cursor: pointer;
 
   &:hover {

@@ -1,26 +1,17 @@
 import styled from 'styled-components'
 import variables from '../../styles/variables'
-import backgroundImage from '../../assets/images/background.jpeg'
 
 const { colors, transitions } = variables
 
-export const StyledLoginForm = styled.div`
+export const StyledLoginForm = styled.form`
+  position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background: url(${backgroundImage}) center / cover no-repeat;
-
-  .form {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 15px;
-    padding: 7px 20px 34px;
-    min-width: 460px;
-    background-color: ${colors.lightText};
-  }
+  row-gap: 15px;
+  padding: 7px 20px 34px;
+  min-width: 460px;
+  background-color: ${colors.lightText};
 
   .toggle-form-btn {
     position: relative;
