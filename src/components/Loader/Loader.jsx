@@ -1,4 +1,4 @@
-import LoaderContainer from './loader.styled'
+import LoaderContainer from './Loader.styled'
 
 const Loader = () => {
   return (

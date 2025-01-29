@@ -1,21 +1,49 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router'
+import Loader from '../../components/Loader/Loader'
 import Card from '../../components/Card/Card'
 import { StyledMain } from './Main.styled'
-import products from '../../data/products'
+import { getGoods } from '../../api/goods/index'
 
 const Main = ({ renderCards, mainType }) => {
+  const [loading, seLoading] = useState(false)
+  const [goods, setGoods] = useState([])
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    const fetchGoods = async () => {
+      try {
+        seLoading(true)
+        const goodsData = await getGoods()
+        setGoods(goodsData)
+      } catch (error) {
+        const errorMessage = error.response.data.message
+        setError(errorMessage)
+        console.error(error)
+      } finally {
+        seLoading(false)
+      }
+    }
+
+    fetchGoods()
+  }, [])
+
   return (
     <StyledMain $mainType={mainType}>
+      {loading && <Loader />}
       <div className="inner container">
+
+        {error && <div className="error-message">{error}</div>}
+
         <ul className="product-list">
 
-          {renderCards && products.map((product) => (
-            <Link to={`/product/${product.id}`} key={product.id}>
+          {renderCards && goods.map((good) => (
+            <Link to={`/good/${good.id}`} key={good.id}>
               <Card
-                title={product.title}
-                preview={product.preview}
-                description={product.description}
-                price={product.price}
+                title={good.title}
+                preview={good.preview}
+                description={good.description}
+                price={good.price}
               />
             </Link>
           ))}

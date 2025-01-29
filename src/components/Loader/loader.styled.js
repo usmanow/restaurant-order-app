@@ -13,7 +13,10 @@ const spinnerAnimation = keyframes`
 
 const LoaderContainer = styled.div`
   display: inline-block;
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 80px;
   height: 80px;
   color: ${variables.colors.accent};
@@ -27,7 +30,7 @@ const LoaderContainer = styled.div`
     animation: ${spinnerAnimation} 1.2s linear infinite;
 
     &:after {
-      content: " ";
+      content: '';
       display: block;
       position: absolute;
       top: 3.2px;
