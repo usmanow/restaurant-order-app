@@ -11,6 +11,8 @@ const Main = ({ renderCards, mainType }) => {
   const [error, setError] = useState(null)
 
   useEffect(() => {
+    if (mainType === 'cart') return
+
     const fetchGoods = async () => {
       try {
         seLoading(true)
@@ -26,7 +28,7 @@ const Main = ({ renderCards, mainType }) => {
     }
 
     fetchGoods()
-  }, [])
+  }, [mainType])
 
   return (
     <StyledMain $mainType={mainType}>
@@ -37,7 +39,7 @@ const Main = ({ renderCards, mainType }) => {
 
         <ul className="product-list">
 
-          {renderCards && goods.map((good) => (
+          {mainType !== 'cart' && goods.map((good) => (
             <Link to={`/good/${good.id}`} key={good.id}>
               <Card
                 title={good.title}

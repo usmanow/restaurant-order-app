@@ -30,7 +30,7 @@ const LoginForm = ({ toggleForm }) => {
   }
 
   const validateEmail = (email) => {
-    const emailRegex = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, '')
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
     if (!email) return errorMessages.emailRequired
     if (!emailRegex.test(email)) return errorMessages.invalidEmail
