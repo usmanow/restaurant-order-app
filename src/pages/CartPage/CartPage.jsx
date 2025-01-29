@@ -10,7 +10,6 @@ const CartPage = () => {
         title='Корзина'
       />
       <Main
-        renderCards={false}
         mainType='cart'
       />
       <Footer />

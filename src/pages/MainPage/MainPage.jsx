@@ -9,8 +9,7 @@ const MainPage = () => {
         title='Наша продукция'
       />
       <Main
-        renderCards={true}
-        mainType='main-page'
+        mainType='goods'
       />
     </>
   )
