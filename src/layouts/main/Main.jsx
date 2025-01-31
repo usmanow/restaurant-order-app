@@ -5,7 +5,7 @@ import Card from '../../components/Card/Card'
 import { StyledMain } from './Main.styled'
 import { getGoods } from '../../api/goods/index'
 
-const Main = ({ renderCards, mainType }) => {
+const Main = ({ mainType }) => {
   const [loading, seLoading] = useState(false)
   const [goods, setGoods] = useState([])
   const [error, setError] = useState(null)
