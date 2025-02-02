@@ -15,6 +15,6 @@ export const StyledCartButton = styled.button`
   transition: opacity ${transitions.default};
 
   &:hover {
-    opacity: ${hovers.default}
+    opacity: ${hovers.default};
   }
 `

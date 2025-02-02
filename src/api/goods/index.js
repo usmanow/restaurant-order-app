@@ -9,7 +9,7 @@ const fetchDataWithToken = (endpoint, token) => {
 }
 
 export const getGoods = (page = '1', token) => {
-  return fetchDataWithToken(`/goods/?page${page}`, token)
+  return fetchDataWithToken(`/goods/?page=${page}`, token)
 }
 
 export const getGoodById = (id, token) => {

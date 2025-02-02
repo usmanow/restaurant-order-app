@@ -21,7 +21,6 @@ const ProductPage = () => {
       try {
         setLoading(true)
         const goodData = await getGoodById(params.goodId, context.token)
-        console.log(goodData.data)
         setGood(goodData.data)
       } catch (error) {
         showNotification(error.response.data.message, ERROR_NOTIFICATION)
@@ -43,14 +42,13 @@ const ProductPage = () => {
       />
 
       <StyledProductInfo>
-        <div className="inner container">
+        {loading && <Loader />}
 
+        <div className="inner container">
           <div className="product">
             <img
               className="image"
               src={good.imgUrl}
-              width='501'
-              height='503'
               alt={good.title}
             />
 
@@ -60,23 +58,17 @@ const ProductPage = () => {
 
               <div className="purchase">
                 <span className="price">{good.price} ₽</span>
-
                 <Button
                   children='В корзину'
                   buttonType='placeOrder'
                   type='submit'
                   onClick={() => console.log('товар добавлен в корзину')}
                 />
+              </div>
 
-                </div>
             </div>
           </div>
-
-          {loading && <Loader />}
-
-
         </div>
-
       </StyledProductInfo>
     </StyledProductPageWrapper>
   )

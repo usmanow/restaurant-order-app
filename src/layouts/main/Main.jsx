@@ -33,7 +33,9 @@ const Main = ({ mainType }) => {
 
   return (
     <StyledMain $mainType={mainType}>
+
       {loading && <Loader />}
+
       <div className="inner container">
         <ul className="product-list">
 

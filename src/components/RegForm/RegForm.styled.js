@@ -84,12 +84,6 @@ export const StyledRegForm = styled.form`
     &_rules {
       top: 293px;
     }
-
-    &_exists {
-      bottom: 88px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
   }
 `
 

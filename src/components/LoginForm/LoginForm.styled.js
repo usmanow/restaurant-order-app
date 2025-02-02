@@ -77,11 +77,5 @@ export const StyledLoginForm = styled.form`
     &_password {
       top: 206px;
     }
-
-    &_general {
-      left: 50%;
-      bottom: 88px;
-      transform: translateX(-50%);
-    }
   }
 `

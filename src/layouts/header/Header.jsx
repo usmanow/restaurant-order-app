@@ -12,8 +12,8 @@ const Header = ({ showArrow, title, backgroundColor }) => {
     <StyledHeader $backgroundColor={backgroundColor}>
       <div className="inner container">
 
-        {showArrow && (
-          <button className="arrow-button" type='button' onClick={() => navigate(-1)}>
+        {showArrow &&
+          (<button className="arrow-button" type='button' onClick={() => navigate(-1)}>
           <svg width="13" height="13" viewBox="0 0 9.60023 6.74902" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               id="Vector"
@@ -23,8 +23,7 @@ const Header = ({ showArrow, title, backgroundColor }) => {
               fillRule="nonzero"
             />
           </svg>
-          </button>
-        )}
+          </button>)}
 
         {title && <h1 className="title">{title}</h1>}
 

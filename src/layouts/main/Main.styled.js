@@ -15,6 +15,6 @@ export const StyledMain = styled.main`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 35px 15px
+    gap: 35px 15px;
   }
 `
