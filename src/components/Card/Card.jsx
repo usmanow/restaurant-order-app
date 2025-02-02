@@ -12,7 +12,7 @@ const Card = ({ title, preview, description, price }) => {
     <StyledCard>
       <img
         className="image"
-        src={require(`../../assets/images/${preview}`)}
+        src={preview}
         width='270'
         height='271'
         alt={title}
@@ -20,7 +20,7 @@ const Card = ({ title, preview, description, price }) => {
       <h2 className="title">{title}</h2>
       <p className="description">{description}</p>
       <div className="purchase">
-        <span className="price">{price}</span>
+        <span className="price">{price} ₽</span>
 
         <CartActionButton onClick={handleButtonClick} />
 

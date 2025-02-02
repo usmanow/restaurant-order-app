@@ -8,6 +8,7 @@ const variables = {
     lightText: '#FFFFFF',
     darkText: '#131212',
     accent: '#D58C51',
+    accentAlt: '#F2A34E',
     error: '#FF0A0A',
     disabledButton: '#3C3C3C'
   },

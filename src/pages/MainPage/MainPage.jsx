@@ -6,6 +6,7 @@ const MainPage = () => {
     <>
       <Header
         showArrow={false}
+        backgroundColor={true}
         title='Наша продукция'
       />
       <Main

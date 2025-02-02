@@ -1,17 +1,84 @@
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
-import products from '../../data/products'
+import { getGoodById } from '../../api/goods'
+import { useAuthContext } from '../../context/authContext'
+import Header from '../..//layouts/header/Header'
+import Loader from '../../components/Loader/Loader'
+import Button from '../../ui/Button/Button'
+import { StyledProductPageWrapper } from './ProductPage.styled'
+import { StyledProductInfo } from './ProductPage.styled'
+import showNotification from '../../components/Notification/notification-emitter'
+import { ERROR_NOTIFICATION } from '../../components/Notification/notification-type'
 
 const ProductPage = () => {
-  const { id } = useParams()
+  const [loading , setLoading] = useState(false)
+  const [good, setGood] = useState({})
+  const params = useParams()
+  const context = useAuthContext()
 
-  const product = products.find((product) => product.id === Number(id))
+  useEffect(() => {
+    const fetchGood = async () => {
+      try {
+        setLoading(true)
+        const goodData = await getGoodById(params.goodId, context.token)
+        console.log(goodData.data)
+        setGood(goodData.data)
+      } catch (error) {
+        showNotification(error.response.data.message, ERROR_NOTIFICATION)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchGood()
+  }, [params.goodId, context.token])
 
   return (
-    <div style={{ color: 'black', fontSize: '30px' }}>
-      <h1>{product.title}</h1>
-      <p>{product.description}</p>
-      <p>{product.price}</p>
-    </div>
+    <StyledProductPageWrapper>
+
+      <Header
+        showArrow={true}
+        backgroundColor={false}
+        title=''
+      />
+
+      <StyledProductInfo>
+        <div className="inner container">
+
+          <div className="product">
+            <img
+              className="image"
+              src={good.imgUrl}
+              width='501'
+              height='503'
+              alt={good.title}
+            />
+
+            <div className="product-info">
+              <h2 className="title">{good.title}</h2>
+              <p className="description">{good.description}</p>
+
+              <div className="purchase">
+                <span className="price">{good.price} ₽</span>
+
+                <Button
+                  children='В корзину'
+                  buttonType='placeOrder'
+                  type='submit'
+                  onClick={() => console.log('товар добавлен в корзину')}
+                />
+
+                </div>
+            </div>
+          </div>
+
+          {loading && <Loader />}
+
+
+        </div>
+
+      </StyledProductInfo>
+    </StyledProductPageWrapper>
   )
 }
 

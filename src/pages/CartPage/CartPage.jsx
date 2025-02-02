@@ -7,6 +7,7 @@ const CartPage = () => {
     <>
       <Header
         showArrow={true}
+        backgroundColor={true}
         title='Корзина'
       />
       <Main

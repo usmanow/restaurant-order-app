@@ -6,8 +6,6 @@ const errorMessages = {
   invalidEmail: 'Некорректный email',
   passwordTooShort: 'Пароль должен содержать не менее 6-и символов',
   passwordMismatch: 'Пароли не совпадают',
-  invalidLoginPassword: 'Логин или пароль неверен',
-  userExists: 'Такой пользователь уже существует',
 }
 
 export default errorMessages

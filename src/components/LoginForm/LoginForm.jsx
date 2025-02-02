@@ -1,11 +1,16 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router'
 import Input from '../Input/Input'
 import Button from '../../ui/Button/Button'
 import { StyledLoginForm } from './LoginForm.styled'
 import errorMessages from '../../data/errorMessages'
+import { login } from '../../api/auth'
+import { useAuthContext } from '../../context/authContext'
+import showNotification from '../Notification/notification-emitter'
+import { ERROR_NOTIFICATION, SUCCESS_NOTIFICATION } from '../Notification/notification-type'
 
 const LoginForm = ({ toggleForm }) => {
+  const context = useAuthContext()
+
   const [formValues, setFormValues] = useState({
     email: '',
     password: '',
@@ -63,9 +68,14 @@ const LoginForm = ({ toggleForm }) => {
   const submitHandler = (e) => {
     e.preventDefault()
 
-    if (!isFormValid) return
-
-    alert('Вы авторизованы')
+    login(formValues.email, formValues.password)
+      .then((response) => {
+        context.login(response.data.token)
+        showNotification('Вы авторизованы', SUCCESS_NOTIFICATION)
+      })
+      .catch((error) => {
+        showNotification(error.response.data.message, ERROR_NOTIFICATION)
+      })
   }
 
   return (
@@ -96,16 +106,13 @@ const LoginForm = ({ toggleForm }) => {
 
       </div>
 
-      <span className="error error_general">{errors.general}</span>
+      <Button
+        children='Войти'
+        buttonType='form'
+        type='submit'
+        disabled={!isFormValid}
+      />
 
-      <Link to='/'>
-        <Button
-          children='Войти'
-          buttonType='form'
-          type='submit'
-          disabled={!isFormValid}
-        />
-      </Link>
     </StyledLoginForm>
   )
 }

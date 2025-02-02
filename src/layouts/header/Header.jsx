@@ -2,12 +2,14 @@ import { Link, useNavigate } from 'react-router'
 import Button from '../../ui/Button/Button'
 import CartButton from '../../ui/CartButton/CartButton'
 import { StyledHeader } from './Header.styled'
+import { useAuthContext } from '../../context/authContext'
 
-const Header = ({ showArrow, title }) => {
+const Header = ({ showArrow, title, backgroundColor }) => {
   const navigate = useNavigate()
+  const context = useAuthContext()
 
   return (
-    <StyledHeader>
+    <StyledHeader $backgroundColor={backgroundColor}>
       <div className="inner container">
 
         {showArrow && (
@@ -24,7 +26,7 @@ const Header = ({ showArrow, title }) => {
           </button>
         )}
 
-        <h1 className="title">{title}</h1>
+        {title && <h1 className="title">{title}</h1>}
 
         <div className="controls">
           <div className="order-info">
@@ -36,13 +38,12 @@ const Header = ({ showArrow, title }) => {
             <CartButton />
           </Link>
 
-          <Link to='/authorization'>
-            <Button
-              children='Выйти'
-              buttonType='logOut'
-              type='button'
-            />
-          </Link>
+          <Button
+            children='Выйти'
+            buttonType='logOut'
+            type='button'
+            onClick={context.logOut}
+          />
 
         </div>
       </div>
