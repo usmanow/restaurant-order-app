@@ -65,17 +65,16 @@ const LoginForm = ({ toggleForm }) => {
     !Object.values(errors).some((error) => error) &&
     Object.values(formValues).every((value) => value)
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault()
 
-    login(formValues.email, formValues.password)
-      .then((response) => {
-        context.login(response.data.token)
-        showNotification('Вы авторизованы', SUCCESS_NOTIFICATION)
-      })
-      .catch((error) => {
-        showNotification(error.response.data.message, ERROR_NOTIFICATION)
-      })
+    try {
+      const response = await login(formValues.email, formValues.password)
+      context.login(response.data.token)
+      showNotification('Вы авторизованы', SUCCESS_NOTIFICATION)
+    } catch (error) {
+      showNotification(error.response.data.message, ERROR_NOTIFICATION)
+    }
   }
 
   return (

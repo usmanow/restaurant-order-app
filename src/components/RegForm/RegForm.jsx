@@ -94,17 +94,16 @@ const RegForm = ({ toggleForm }) => {
     !Object.values(errors).some((error) => error) &&
     Object.values(formValues).every((value) => value)
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault()
 
-    registration(formValues.email, formValues.password)
-      .then(() => {
-        showNotification('Успешная регистрация', SUCCESS_NOTIFICATION)
-        toggleForm()
-      })
-      .catch((error) => {
-        showNotification(error.response.data.message, ERROR_NOTIFICATION)
-      })
+    try {
+      await registration(formValues.email, formValues.password)
+      showNotification('Успешная регистрация', SUCCESS_NOTIFICATION)
+      toggleForm()
+    } catch (error) {
+      showNotification(error.response.data.message, ERROR_NOTIFICATION)
+    }
   }
 
   return (

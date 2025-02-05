@@ -13,15 +13,16 @@ import { ERROR_NOTIFICATION } from '../../components/Notification/notification-t
 const ProductPage = () => {
   const [loading , setLoading] = useState(false)
   const [good, setGood] = useState({})
-  const params = useParams()
-  const context = useAuthContext()
+  const { goodId } = useParams()
+  const { token } = useAuthContext()
 
   useEffect(() => {
     const fetchGood = async () => {
+      setLoading(true)
+
       try {
-        setLoading(true)
-        const goodData = await getGoodById(params.goodId, context.token)
-        setGood(goodData.data)
+        const goodData = await getGoodById(goodId, token)
+        setGood(goodData)
       } catch (error) {
         showNotification(error.response.data.message, ERROR_NOTIFICATION)
       } finally {
@@ -30,7 +31,7 @@ const ProductPage = () => {
     }
 
     fetchGood()
-  }, [params.goodId, context.token])
+  }, [goodId, token])
 
   return (
     <StyledProductPageWrapper>

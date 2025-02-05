@@ -9,27 +9,28 @@ import showNotification from '../../components/Notification/notification-emitter
 import { ERROR_NOTIFICATION } from '../../components/Notification/notification-type'
 
 const Main = ({ mainType }) => {
-  const [loading, seLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [goods, setGoods] = useState([])
-  const context = useAuthContext()
+  const { token } = useAuthContext()
 
   useEffect(() => {
     if (mainType === 'cart') return
 
     const fetchGoods = async () => {
+      setLoading(true)
+
       try {
-        seLoading(true)
-        const goodsData = await getGoods('1', context.token)
-        setGoods(goodsData.data.goods)
+        const goodsData = await getGoods('1', token)
+        setGoods(goodsData.goods)
       } catch (error) {
-        showNotification(error.response.data.message, ERROR_NOTIFICATION)
+        showNotification(error.response?.data?.message, ERROR_NOTIFICATION)
       } finally {
-        seLoading(false)
+        setLoading(false)
       }
     }
 
     fetchGoods()
-  }, [mainType, context.token])
+  }, [mainType, token])
 
   return (
     <StyledMain $mainType={mainType}>
@@ -39,7 +40,7 @@ const Main = ({ mainType }) => {
       <div className="inner container">
         <ul className="product-list">
 
-          {mainType !== 'cart' && goods.map((good) => (
+          {goods.map((good) => (
             <Link to={`/good/${good.id}`} key={good.id}>
               <Card
                 title={good.title}
