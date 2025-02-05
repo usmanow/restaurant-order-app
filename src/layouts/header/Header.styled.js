@@ -4,7 +4,7 @@ import variables from '../../styles/variables'
 const { colors, borders, transitions } = variables
 
 export const StyledHeader = styled.header`
-  background-color: ${colors.darkBg};
+  background-color: ${props => (props.$backgroundColor === true ? colors.darkBg : 'unset')};
 
   .inner {
     display: flex;

@@ -2,16 +2,18 @@ import { Link, useNavigate } from 'react-router'
 import Button from '../../ui/Button/Button'
 import CartButton from '../../ui/CartButton/CartButton'
 import { StyledHeader } from './Header.styled'
+import { useAuthContext } from '../../context/authContext'
 
-const Header = ({ showArrow, title }) => {
+const Header = ({ showArrow, title, backgroundColor }) => {
   const navigate = useNavigate()
+  const context = useAuthContext()
 
   return (
-    <StyledHeader>
+    <StyledHeader $backgroundColor={backgroundColor}>
       <div className="inner container">
 
-        {showArrow && (
-          <button className="arrow-button" type='button' onClick={() => navigate(-1)}>
+        {showArrow &&
+          (<button className="arrow-button" type='button' onClick={() => navigate(-1)}>
           <svg width="13" height="13" viewBox="0 0 9.60023 6.74902" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               id="Vector"
@@ -21,10 +23,9 @@ const Header = ({ showArrow, title }) => {
               fillRule="nonzero"
             />
           </svg>
-          </button>
-        )}
+          </button>)}
 
-        <h1 className="title">{title}</h1>
+        {title && <h1 className="title">{title}</h1>}
 
         <div className="controls">
           <div className="order-info">
@@ -36,13 +37,12 @@ const Header = ({ showArrow, title }) => {
             <CartButton />
           </Link>
 
-          <Link to='/authorization'>
-            <Button
-              children='Выйти'
-              buttonType='logOut'
-              type='button'
-            />
-          </Link>
+          <Button
+            children='Выйти'
+            buttonType='logOut'
+            type='button'
+            onClick={context.logOut}
+          />
 
         </div>
       </div>

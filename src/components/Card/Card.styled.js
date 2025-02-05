@@ -34,7 +34,6 @@ export const StyledCard = styled.li`
   }
 
   .description {
-    margin-top: auto;
     font-size: 14px;
     font-weight: 400;
     line-height: 1.21;

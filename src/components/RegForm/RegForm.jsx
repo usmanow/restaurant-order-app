@@ -3,6 +3,9 @@ import Input from '../Input/Input'
 import Button from '../../ui/Button/Button'
 import { StyledRegForm, CheckboxWrapper } from './RegForm.styled'
 import errorMessages from '../../data/errorMessages'
+import { registration } from '../../api/auth'
+import showNotification from '../Notification/notification-emitter'
+import { ERROR_NOTIFICATION, SUCCESS_NOTIFICATION } from '../Notification/notification-type'
 
 const RegForm = ({ toggleForm }) => {
   const [formValues, setFormValues] = useState({
@@ -35,7 +38,7 @@ const RegForm = ({ toggleForm }) => {
   }
 
   const validateEmail = (email) => {
-    const emailRegex = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, '')
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
     if (!email) return errorMessages.emailRequired
     if (!emailRegex.test(email)) return errorMessages.invalidEmail
@@ -91,13 +94,16 @@ const RegForm = ({ toggleForm }) => {
     !Object.values(errors).some((error) => error) &&
     Object.values(formValues).every((value) => value)
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault()
 
-    if (!isFormValid) return
-
-    alert('Вы зарегистрированы')
-    toggleForm()
+    try {
+      await registration(formValues.email, formValues.password)
+      showNotification('Успешная регистрация', SUCCESS_NOTIFICATION)
+      toggleForm()
+    } catch (error) {
+      showNotification(error.response.data.message, ERROR_NOTIFICATION)
+    }
   }
 
   return (
@@ -155,8 +161,6 @@ const RegForm = ({ toggleForm }) => {
 
         <span className="error error_rules">{errors.agreed}</span>
       </CheckboxWrapper>
-
-      <span className="error error_exists">{errors.userExists}</span>
 
       <Button
         children='Зарегистрироваться'

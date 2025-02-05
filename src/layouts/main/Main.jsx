@@ -4,46 +4,47 @@ import Loader from '../../components/Loader/Loader'
 import Card from '../../components/Card/Card'
 import { StyledMain } from './Main.styled'
 import { getGoods } from '../../api/goods/index'
+import { useAuthContext } from '../../context/authContext'
+import showNotification from '../../components/Notification/notification-emitter'
+import { ERROR_NOTIFICATION } from '../../components/Notification/notification-type'
 
 const Main = ({ mainType }) => {
-  const [loading, seLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [goods, setGoods] = useState([])
-  const [error, setError] = useState(null)
+  const { token } = useAuthContext()
 
   useEffect(() => {
     if (mainType === 'cart') return
 
     const fetchGoods = async () => {
+      setLoading(true)
+
       try {
-        seLoading(true)
-        const goodsData = await getGoods()
-        setGoods(goodsData)
+        const goodsData = await getGoods('1', token)
+        setGoods(goodsData.goods)
       } catch (error) {
-        const errorMessage = error.response.data.message
-        setError(errorMessage)
-        console.error(error)
+        showNotification(error.response?.data?.message, ERROR_NOTIFICATION)
       } finally {
-        seLoading(false)
+        setLoading(false)
       }
     }
 
     fetchGoods()
-  }, [mainType])
+  }, [mainType, token])
 
   return (
     <StyledMain $mainType={mainType}>
+
       {loading && <Loader />}
+
       <div className="inner container">
-
-        {error && <div className="error-message">{error}</div>}
-
         <ul className="product-list">
 
-          {mainType !== 'cart' && goods.map((good) => (
+          {goods.map((good) => (
             <Link to={`/good/${good.id}`} key={good.id}>
               <Card
                 title={good.title}
-                preview={good.preview}
+                preview={good.img_url}
                 description={good.description}
                 price={good.price}
               />
