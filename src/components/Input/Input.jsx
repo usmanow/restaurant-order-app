@@ -1,6 +1,6 @@
 import { StyledInput } from './Input.styled'
 
-const Input = ({ value, onChange, name, placeholder, type, autoComplete }) => {
+const Input = ({ value, onChange, name, placeholder, type, autoComplete, inputType }) => {
   return (
     <StyledInput
       value={value}
@@ -9,6 +9,7 @@ const Input = ({ value, onChange, name, placeholder, type, autoComplete }) => {
       placeholder={placeholder}
       type={type}
       autoComplete={autoComplete}
+      $inputType={inputType}
     >
     </StyledInput>
   )

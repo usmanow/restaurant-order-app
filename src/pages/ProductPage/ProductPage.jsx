@@ -40,6 +40,7 @@ const ProductPage = () => {
         showArrow={true}
         backgroundColor={false}
         title=''
+        showInput={false}
       />
 
       <StyledProductInfo>

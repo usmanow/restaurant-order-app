@@ -13,8 +13,8 @@ const fetchDataWithToken = async (endpoint, token) => {
   }
 }
 
-export const getGoods = async (page = '1', token) => {
-  return fetchDataWithToken(`/goods/?page=${page}`, token)
+export const getGoods = async (page, searchValue, token) => {
+  return fetchDataWithToken(`/goods/?page=${page}&goodTitle=${searchValue}`, token)
 }
 
 export const getGoodById = async (id, token) => {

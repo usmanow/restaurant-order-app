@@ -120,6 +120,7 @@ const RegForm = ({ toggleForm }) => {
           placeholder='Email'
           type='text'
           autoComplete='off'
+          inputType='auth'
         />
         <span className="error error_email">{errors.email}</span>
 
@@ -130,6 +131,7 @@ const RegForm = ({ toggleForm }) => {
           placeholder='Пароль'
           type='password'
           autoComplete='off'
+          inputType='auth'
         />
         <span className="error error_password">{errors.password}</span>
 
@@ -140,6 +142,7 @@ const RegForm = ({ toggleForm }) => {
           placeholder='Подтвердите пароль'
           type='password'
           autoComplete='off'
+          inputType='auth'
         />
         <span className="error error_confirm">{errors.passwordConfirm}</span>
       </div>
