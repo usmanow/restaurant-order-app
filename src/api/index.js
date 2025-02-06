@@ -12,7 +12,7 @@ axiosInstance.interceptors.response.use(
     if (!error.response) {
       showNotification('Ошибка сети или сервер недоступен', ERROR_NOTIFICATION)
     } else {
-      showNotification('Произошла ошибка при запросе к серверу', ERROR_NOTIFICATION)
+      showNotification(error.response.data.message, ERROR_NOTIFICATION)
     }
     return Promise.reject(error)
   }

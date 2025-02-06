@@ -90,6 +90,7 @@ const LoginForm = ({ toggleForm }) => {
           placeholder='Email'
           type='text'
           autoComplete='off'
+          inputType='auth'
         />
         <span className="error error_email">{errors.email}</span>
 
@@ -100,6 +101,7 @@ const LoginForm = ({ toggleForm }) => {
           placeholder='Пароль'
           type='password'
           autoComplete='off'
+          inputType='auth'
         />
         <span className="error error_password">{errors.password}</span>
 

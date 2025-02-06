@@ -1,12 +1,22 @@
 import { Link, useNavigate } from 'react-router'
+import Input from '../../components/Input/Input'
 import Button from '../../ui/Button/Button'
 import CartButton from '../../ui/CartButton/CartButton'
 import { StyledHeader } from './Header.styled'
 import { useAuthContext } from '../../context/authContext'
 
-const Header = ({ showArrow, title, backgroundColor }) => {
+const Header = ({
+  showArrow,
+  title,
+  backgroundColor,
+  showInput,
+  searchValue,
+  onSearchChange,
+  totalQuantity = 0,
+  totalPrice = 0
+}) => {
   const navigate = useNavigate()
-  const context = useAuthContext()
+  const { logOut } = useAuthContext()
 
   return (
     <StyledHeader $backgroundColor={backgroundColor}>
@@ -27,21 +37,30 @@ const Header = ({ showArrow, title, backgroundColor }) => {
 
         {title && <h1 className="title">{title}</h1>}
 
+        {showInput &&
+          <Input
+            value={searchValue}
+            onChange={onSearchChange}
+            placeholder='Поиск'
+            type='text'
+            inputType='main'
+          />}
+
         <div className="controls">
           <div className="order-info">
-            <span className="product-quantity">3 товара</span>
-            <span className="total-price">на сумму 3 500 ₽</span>
+            <span className="product-quantity">{totalQuantity} товара</span>
+            <span className="total-price">на сумму {totalPrice} ₽</span>
           </div>
 
           <Link to='/cart'>
-            <CartButton />
+            <CartButton totalQuantity={totalQuantity} />
           </Link>
 
           <Button
             children='Выйти'
             buttonType='logOut'
             type='button'
-            onClick={context.logOut}
+            onClick={logOut}
           />
 
         </div>
