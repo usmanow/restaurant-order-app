@@ -7,16 +7,16 @@ import { useDebounce } from '../../hooks/useDebouncedValue'
 const MainPage = () => {
   const [searchValue, setSearchValue] = useState('')
   const debouncedQuery = useDebounce(searchValue, 500)
-  const [page, setPage] = useState('1')
+  const [page, setPage] = useState(1)
   const location = useLocation()
   const navigate = useNavigate()
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search)
     const query = queryParams.get('query') || ''
-    const page = queryParams.get('page') || '1'
+    const page = Number(queryParams.get('page')) || 1
     setSearchValue(query)
-    setPage(Number(page))
+    setPage(page)
   }, [location.search])
 
   const handleSearchChange = (e) => {
@@ -40,7 +40,6 @@ const MainPage = () => {
         onSearchChange={handleSearchChange}
       />
       <Main
-        mainType='goods'
         searchValue={debouncedQuery}
         page={page}
       />

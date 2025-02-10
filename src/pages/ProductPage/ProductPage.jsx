@@ -12,7 +12,7 @@ import { ERROR_NOTIFICATION } from '../../components/Notification/notification-t
 
 const ProductPage = () => {
   const [loading , setLoading] = useState(false)
-  const [good, setGood] = useState({})
+  const [good, setGood] = useState(null)
   const { goodId } = useParams()
   const { token } = useAuthContext()
 
@@ -33,6 +33,8 @@ const ProductPage = () => {
     fetchGood()
   }, [goodId, token])
 
+  if (loading || !good) return <Loader />
+
   return (
     <StyledProductPageWrapper>
 
@@ -44,8 +46,6 @@ const ProductPage = () => {
       />
 
       <StyledProductInfo>
-        {loading && <Loader />}
-
         <div className="inner container">
           <div className="product">
             <img
