@@ -1,7 +1,7 @@
 import { StyledPagination } from './Pagination.styled'
 
-const Pagination = ({ currentPage, totalItems, itemsPerPage, onPageChange }) => {
-  const totalPages = Math.ceil(totalItems / itemsPerPage)
+const Pagination = ({ currentPage, totalProducts, ProductsPerPage, onPageChange }) => {
+  const totalPages = Math.ceil(totalProducts / ProductsPerPage)
 
   const handlePageClick = (page) => {
     if (page !== currentPage) onPageChange(page)

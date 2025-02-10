@@ -1,4 +1,13 @@
 import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import {
+  getProducts,
+  getTotalProducts,
+  getIsLoading,
+  setProducts,
+  setTotalProducts,
+  setIsLoading
+} from '../../store/productsSlice'
 import { Link, useNavigate } from 'react-router'
 import Loader from '../../components/Loader/Loader'
 import Card from '../../components/Card/Card'
@@ -9,72 +18,66 @@ import { useAuthContext } from '../../context/authContext'
 import showNotification from '../../components/Notification/notification-emitter'
 import { ERROR_NOTIFICATION } from '../../components/Notification/notification-type'
 
-const Main = ({ mainType, searchValue, page }) => {
-  const [loading, setLoading] = useState(false)
-  const [goods, setGoods] = useState([])
-  const [totalItems, setTotalItems] = useState(0)
+const Main = ({ searchValue, page }) => {
+  const products = useSelector(getProducts)
+  const totalProducts = useSelector(getTotalProducts)
+  const loading = useSelector(getIsLoading)
+  const dispatch = useDispatch()
+
   const [isFirstLoad, setIsFirstLoad] = useState(true)
   const { token } = useAuthContext()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (mainType === 'cart') return
-
     const fetchGoods = async () => {
-      setLoading(true)
+      dispatch(setIsLoading(true))
       setIsFirstLoad(false)
 
       try {
         const response = await getGoods(page, searchValue, token)
-        setGoods(response.goods)
-        setTotalItems(response.total)
+        dispatch(setProducts(response.goods))
+        dispatch(setTotalProducts(response.total))
       } catch (error) {
         showNotification(error.response?.data?.message, ERROR_NOTIFICATION)
       } finally {
-        setLoading(false)
+        dispatch(setIsLoading(false))
       }
     }
 
       fetchGoods()
-  }, [mainType, token, searchValue, page])
+  }, [token, searchValue, page, dispatch])
 
   const handlePageChange = (newPage) => {
     navigate(`?query=${searchValue}&page=${newPage}`)
   }
 
   return (
-    <StyledMain $mainType={mainType}>
-
+    <StyledMain>
       {loading && <Loader />}
 
       <div className="inner container">
-        <ul className="product-list">
 
-          {goods.map((good) => (
-            <Link to={`/good/${good.id}`} key={good.id}>
+        {!loading && !isFirstLoad && !products.length && (
+            <p className="no-results">Нет результатов</p>
+        )}
+
+        <ul className="product-list">
+          {products.map((product) => (
+            <Link to={`/good/${product.id}`} key={product.id}>
               <Card
-                title={good.title}
-                preview={good.img_url}
-                description={good.description}
-                price={good.price}
+                title={product.title}
+                preview={product.img_url}
+                description={product.description}
+                price={product.price}
               />
             </Link>
           ))}
-
         </ul>
-
-        {!loading && !isFirstLoad && !goods.length && (
-          <p className="no-results">Нет результатов</p>
-        )}
-
-        {mainType === 'cart' && !goods.length && !loading && (
-          <p className="no-results">Ваша корзина пуста</p>
-        )}
 
         <Pagination
           currentPage={page}
-          totalItems={totalItems}
-          itemsPerPage={4}
+          totalProducts={totalProducts}
+          ProductsPerPage={4}
           onPageChange={handlePageChange}
         />
 

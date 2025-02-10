@@ -20,9 +20,12 @@ export const StyledMain = styled.main`
     flex-wrap: wrap;
     justify-content: center;
     gap: 35px 15px;
+    min-height: 552px;
   }
 
   .no-results {
     font-size: 30px;
+    font-weight: 500;
+    line-height: 1.23;
   }
 `

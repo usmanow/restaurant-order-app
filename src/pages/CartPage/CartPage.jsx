@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Header from '../../layouts/header/Header'
-import Main from '../../layouts/main/Main'
 import Footer from '../../layouts/footer/Footer'
+import { StyledMain } from './CartPage.styled'
 
 const CartPage = () => {
   const [totalQuantity, setTotalQuantity] = useState(0)
@@ -17,9 +17,13 @@ const CartPage = () => {
         totalQuantity={totalQuantity}
         totalPrice={totalPrice}
       />
-      <Main
-        mainType='cart'
-      />
+
+      <StyledMain>
+        <div className="inner container">
+          <p className="no-results">Корзина пуста</p>
+        </div>
+      </StyledMain>
+
       <Footer
         totalPrice={totalPrice}
       />
