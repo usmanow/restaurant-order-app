@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react'
 import Header from '../../layouts/header/Header'
 import Main from '../../layouts/main/Main'
 import { useLocation, useNavigate } from 'react-router'
+import { useDebounce } from '../../hooks/useDebouncedValue'
 
 const MainPage = () => {
   const [searchValue, setSearchValue] = useState('')
+  const debouncedQuery = useDebounce(searchValue, 500)
   const [page, setPage] = useState('1')
   const location = useLocation()
   const navigate = useNavigate()
@@ -18,9 +20,14 @@ const MainPage = () => {
   }, [location.search])
 
   const handleSearchChange = (e) => {
-    const query = e.target.value
-    navigate(`?query=${query}&page=1`, { replace: true })
+    setSearchValue(e.target.value)
   }
+
+  useEffect(() => {
+    if (debouncedQuery) {
+      navigate(`?query=${debouncedQuery}&page=1`, { replace: true })
+    }
+  }, [debouncedQuery, navigate])
 
   return (
     <>
@@ -34,7 +41,7 @@ const MainPage = () => {
       />
       <Main
         mainType='goods'
-        searchValue={searchValue}
+        searchValue={debouncedQuery}
         page={page}
       />
     </>

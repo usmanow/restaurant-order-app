@@ -48,6 +48,15 @@ const Main = ({ mainType, searchValue, page }) => {
       {loading && <Loader />}
 
       <div className="inner container">
+
+      {!loading && !isFirstLoad && !goods.length && (
+          <p className="no-results">Нет результатов</p>
+        )}
+
+      {mainType === 'cart' && !goods.length && !loading && (
+        <p className="no-results">Ваша корзина пуста</p>
+      )}
+
         <ul className="product-list">
 
           {goods.map((good) => (
@@ -62,14 +71,6 @@ const Main = ({ mainType, searchValue, page }) => {
           ))}
 
         </ul>
-
-        {!loading && !isFirstLoad && !goods.length && (
-          <p className="no-results">Нет результатов</p>
-        )}
-
-        {mainType === 'cart' && !goods.length && !loading && (
-          <p className="no-results">Ваша корзина пуста</p>
-        )}
 
         <Pagination
           currentPage={page}
