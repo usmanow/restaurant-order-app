@@ -20,4 +20,11 @@ export const StyledMain = styled.main`
     font-weight: 500;
     line-height: 1.23;
   }
+
+  .product-list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    width: 100%;
+  }
 `

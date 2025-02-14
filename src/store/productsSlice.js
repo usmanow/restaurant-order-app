@@ -14,7 +14,7 @@ const productsSlice = createSlice({
       state.list = action.payload
     },
 
-    setIsLoading(state, action) {
+    setIsProductsLoading(state, action) {
       state.isLoading = action.payload
     },
 
@@ -24,9 +24,9 @@ const productsSlice = createSlice({
   }
 })
 
-export const getProducts = (state) => state.products.list
+export const getProductsSelector = (state) => state.products.list
 export const getTotalProducts = (state) => state.products.total
-export const getIsLoading = (state) => state.products.isLoading
+export const getIsProductsLoading = (state) => state.products.isLoading
 
-export const { setProducts, setIsLoading, setTotalProducts } = productsSlice.actions
+export const { setProducts, setIsProductsLoading, setTotalProducts } = productsSlice.actions
 export default productsSlice.reducer

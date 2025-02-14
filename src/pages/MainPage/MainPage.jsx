@@ -38,6 +38,7 @@ const MainPage = () => {
         showInput={true}
         searchValue={searchValue}
         onSearchChange={handleSearchChange}
+        isNarrow={false}
       />
       <Main
         searchValue={debouncedQuery}

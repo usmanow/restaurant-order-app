@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
-import { getGoodById } from '../../api/goods'
+import { getProductById } from '../../api/products'
 import { useAuthContext } from '../../context/authContext'
 import Header from '../..//layouts/header/Header'
 import Loader from '../../components/Loader/Loader'
@@ -11,29 +11,27 @@ import showNotification from '../../components/Notification/notification-emitter
 import { ERROR_NOTIFICATION } from '../../components/Notification/notification-type'
 
 const ProductPage = () => {
-  const [loading , setLoading] = useState(false)
-  const [good, setGood] = useState(null)
-  const { goodId } = useParams()
+  const [isLoading , setLoading] = useState(false)
+  const [product, setProduct] = useState(null)
+  const { goodId: productId } = useParams()
   const { token } = useAuthContext()
 
   useEffect(() => {
-    const fetchGood = async () => {
+    const fetchProduct = async () => {
       setLoading(true)
 
       try {
-        const goodData = await getGoodById(goodId, token)
-        setGood(goodData)
+        const response = await getProductById(productId, token)
+        setProduct(response)
       } catch (error) {
-        showNotification(error.response.data.message, ERROR_NOTIFICATION)
+        showNotification(error.response?.data?.message, ERROR_NOTIFICATION)
       } finally {
         setLoading(false)
       }
     }
 
-    fetchGood()
-  }, [goodId, token])
-
-  if (loading || !good) return <Loader />
+    fetchProduct()
+  }, [productId, token])
 
   return (
     <StyledProductPageWrapper>
@@ -47,29 +45,29 @@ const ProductPage = () => {
 
       <StyledProductInfo>
         <div className="inner container">
-          <div className="product">
-            <img
-              className="image"
-              src={good.imgUrl}
-              alt={good.title}
-            />
 
-            <div className="product-info">
-              <h2 className="title">{good.title}</h2>
-              <p className="description">{good.description}</p>
+          {isLoading && <Loader />}
 
-              <div className="purchase">
-                <span className="price">{good.price} ₽</span>
-                <Button
-                  children='В корзину'
-                  buttonType='placeOrder'
-                  type='submit'
-                  onClick={() => console.log('товар добавлен в корзину')}
-                />
+          {!isLoading && product && (
+            <div className="product">
+              <img className="image" src={product.imgUrl} alt={product.title} />
+
+              <div className="product-info">
+                <h2 className="title">{product.title}</h2>
+                <p className="description">{product.description}</p>
+
+                <div className="purchase">
+                  <span className="price">{product.price} ₽</span>
+                  <Button
+                    children='В корзину'
+                    buttonType='placeOrder'
+                    type='submit'
+                    onClick={() => console.log('товар добавлен в корзину')}
+                  />
+                </div>
               </div>
-
             </div>
-          </div>
+          )}
         </div>
       </StyledProductInfo>
     </StyledProductPageWrapper>

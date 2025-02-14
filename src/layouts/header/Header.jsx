@@ -13,14 +13,15 @@ const Header = ({
   searchValue,
   onSearchChange,
   totalQuantity = 0,
-  totalPrice = 0
+  totalPrice = 0,
+  isNarrow
 }) => {
   const navigate = useNavigate()
   const { logOut } = useAuthContext()
 
   return (
     <StyledHeader $backgroundColor={backgroundColor}>
-      <div className="inner container">
+      <div className={`inner container ${isNarrow ? 'container_narrow' : ''}`}>
 
         {showArrow &&
           (<button className="arrow-button" type='button' onClick={() => navigate(-1)}>
