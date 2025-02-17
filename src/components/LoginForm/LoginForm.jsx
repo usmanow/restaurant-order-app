@@ -70,10 +70,10 @@ const LoginForm = ({ toggleForm }) => {
 
     try {
       const response = await login(formValues.email, formValues.password)
-      context.login(response.data.token)
+      context.login(response.token)
       showNotification('Вы авторизованы', SUCCESS_NOTIFICATION)
     } catch (error) {
-      showNotification(error.response.data.message, ERROR_NOTIFICATION)
+      showNotification(error.response?.data?.message, ERROR_NOTIFICATION)
     }
   }
 

@@ -16,6 +16,12 @@ const GlobalStyles = createGlobalStyle`
     max-width: 1330px;
     margin-inline: auto;
     padding-inline: 15px;
+
+    &_narrow {
+      max-width: 889px;
+      margin-inline: auto;
+      padding-inline: 15px;
+    }
   }
 `
 

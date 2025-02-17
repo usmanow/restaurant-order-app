@@ -102,7 +102,7 @@ const RegForm = ({ toggleForm }) => {
       showNotification('Успешная регистрация', SUCCESS_NOTIFICATION)
       toggleForm()
     } catch (error) {
-      showNotification(error.response.data.message, ERROR_NOTIFICATION)
+      showNotification(error.response?.data?.message, ERROR_NOTIFICATION)
     }
   }
 

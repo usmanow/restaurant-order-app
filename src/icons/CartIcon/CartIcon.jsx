@@ -13,4 +13,4 @@ const CartIcon = ({ size = 21, color = '#FFFFFF' }) => (
   </svg>
 )
 
-export default CartIcon;
+export default CartIcon

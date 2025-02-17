@@ -58,6 +58,7 @@ export const StyledProductInfo = styled.main`
     align-items: center;
     justify-content: space-between;
     column-gap: 40px;
+    height: 42px;
   }
 
   .price {

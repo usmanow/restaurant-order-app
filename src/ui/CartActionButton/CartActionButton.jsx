@@ -1,8 +1,8 @@
 import { StyledCartActionButton } from './CartActionButton.styled'
 
-const CartActionButton = ({ onClick }) => {
+const CartActionButton = ({ onClick, isCart }) => {
   return (
-    <StyledCartActionButton onClick={onClick}>
+    <StyledCartActionButton onClick={onClick} $isCart={isCart}>
       <span className="line"></span>
     </StyledCartActionButton>
   )

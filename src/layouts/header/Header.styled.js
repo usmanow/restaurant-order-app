@@ -63,6 +63,12 @@ export const StyledHeader = styled.header`
     margin-left: auto;
   }
 
+  .price {
+    display: inline-block;
+    width: 100px;
+    text-align: end;
+  }
+
   .cart-count {
     position: absolute;
     right: -7px;

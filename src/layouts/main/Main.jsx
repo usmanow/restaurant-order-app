@@ -1,27 +1,29 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
-  getProducts,
+  getProductsSelector,
   getTotalProducts,
-  getIsLoading,
+  getIsProductsLoading,
   setProducts,
   setTotalProducts,
-  setIsLoading
+  setIsProductsLoading
 } from '../../store/productsSlice'
 import { Link, useNavigate } from 'react-router'
 import Loader from '../../components/Loader/Loader'
 import Card from '../../components/Card/Card'
 import Pagination from '../../components/Pagination/Pagination'
 import { StyledMain } from './Main.styled'
-import { getGoods } from '../../api/goods/index'
+import { getProducts } from '../../api/products/index'
 import { useAuthContext } from '../../context/authContext'
 import showNotification from '../../components/Notification/notification-emitter'
 import { ERROR_NOTIFICATION } from '../../components/Notification/notification-type'
+import { getIsCartLoading } from '../../store/cartSlice'
 
 const Main = ({ searchValue, page }) => {
-  const products = useSelector(getProducts)
+  const products = useSelector(getProductsSelector)
   const totalProducts = useSelector(getTotalProducts)
-  const loading = useSelector(getIsLoading)
+  const isLoading = useSelector(getIsProductsLoading)
+  const isLoadingCart = useSelector(getIsCartLoading)
   const dispatch = useDispatch()
 
   const [isFirstLoad, setIsFirstLoad] = useState(true)
@@ -29,22 +31,22 @@ const Main = ({ searchValue, page }) => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const fetchGoods = async () => {
-      dispatch(setIsLoading(true))
+    const fetchProducts = async () => {
+      dispatch(setIsProductsLoading(true))
       setIsFirstLoad(false)
 
       try {
-        const response = await getGoods(page, searchValue, token)
+        const response = await getProducts(page, searchValue, token)
         dispatch(setProducts(response.goods))
         dispatch(setTotalProducts(response.total))
       } catch (error) {
         showNotification(error.response?.data?.message, ERROR_NOTIFICATION)
       } finally {
-        dispatch(setIsLoading(false))
+        dispatch(setIsProductsLoading(false))
       }
     }
 
-      fetchGoods()
+    fetchProducts()
   }, [token, searchValue, page, dispatch])
 
   const handlePageChange = (newPage) => {
@@ -53,11 +55,10 @@ const Main = ({ searchValue, page }) => {
 
   return (
     <StyledMain>
-      {loading && <Loader />}
-
       <div className="inner container">
+        {isLoading && isLoadingCart && <Loader />}
 
-        {!loading && !isFirstLoad && !products.length && (
+        {!isLoading && !isFirstLoad && !products.length && (
             <p className="no-results">Нет результатов</p>
         )}
 
@@ -65,6 +66,7 @@ const Main = ({ searchValue, page }) => {
           {products.map((product) => (
             <Link to={`/good/${product.id}`} key={product.id}>
               <Card
+                id={product.id}
                 title={product.title}
                 preview={product.img_url}
                 description={product.description}
@@ -77,7 +79,7 @@ const Main = ({ searchValue, page }) => {
         <Pagination
           currentPage={page}
           totalProducts={totalProducts}
-          ProductsPerPage={4}
+          productsPerPage={4}
           onPageChange={handlePageChange}
         />
 
