@@ -4,7 +4,7 @@ import CartActionButton from '../../ui/CartActionButton/CartActionButton'
 import { Link } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserInfo } from '../../store/usersSlice'
-import { setCart, setIsCartLoading } from '../../store/cartSlice'
+import { getProductAmount, setCart, setIsCartLoading } from '../../store/cartSlice'
 import { deleteProduct, getCart } from '../../api/cart'
 import showNotification from '../Notification/notification-emitter'
 import { ERROR_NOTIFICATION } from '../Notification/notification-type'
@@ -12,6 +12,12 @@ import { ERROR_NOTIFICATION } from '../Notification/notification-type'
 const CartProduct = ({ imgUrl, price, title, productId }) => {
   const dispatch = useDispatch()
   const { id: userId } = useSelector(getUserInfo)
+  const amount = useSelector(getProductAmount(productId))
+
+  const formattedPrice = (price * amount).toLocaleString('ru-RU', {
+    style: 'currency',
+    currency: 'RUB',
+  })
 
   const removeHandler = async () => {
     dispatch(setIsCartLoading(true))
@@ -46,7 +52,7 @@ const CartProduct = ({ imgUrl, price, title, productId }) => {
       />
 
       <div className="purchase">
-        <span className='price'>{price} ₽</span>
+        <span className='price'>{formattedPrice}</span>
 
         <CartActionButton
           isCart={true}

@@ -21,6 +21,12 @@ const Header = ({
   const totalAmount = useSelector(getTotalProductsAmount)
   const totalPrice = useSelector(getTotalPrice)
 
+  const getProductWord = (count) => {
+    if (count % 10 === 1 && count % 100 !== 11) return 'товар'
+    if (count % 10 >= 2 && count % 10 <= 4 && (count % 100 < 10 || count % 100 >= 20)) return 'товара'
+    return 'товаров'
+  }
+
   return (
     <StyledHeader $backgroundColor={backgroundColor}>
       <div className={`inner container ${isNarrow ? 'container_narrow' : ''}`}>
@@ -51,7 +57,7 @@ const Header = ({
 
         <div className="controls">
           <div className="order-info">
-            <span className="product-quantity">{totalAmount} товара</span>
+            <span className="product-quantity">{totalAmount} {getProductWord(totalAmount)}</span>
             <span className="total-price">
               на сумму <span className='price'>{totalPrice}</span>
             </span>

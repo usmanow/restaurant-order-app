@@ -65,7 +65,7 @@ export const StyledHeader = styled.header`
 
   .price {
     display: inline-block;
-    width: 110px;
+    width: 100px;
     text-align: end;
   }
 

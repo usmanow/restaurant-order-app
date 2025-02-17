@@ -25,4 +25,4 @@ const Pagination = ({ currentPage, totalProducts, productsPerPage, onPageChange 
   )
 }
 
-export default Pagination;
+export default Pagination
