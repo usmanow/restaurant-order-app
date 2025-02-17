@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import variables from '../../styles/variables'
 
+const { transitions, colors } = variables
+
 export const StyledCartProduct = styled.li`
   display: flex;
   align-items: center;
@@ -19,10 +21,10 @@ export const StyledCartProduct = styled.li`
     a {
       padding: 10px;
       color: inherit;
-      transition: ${variables.transitions.default};
+      transition: ${transitions.default};
 
       &:hover {
-        color: ${variables.colors.accent};
+        color: ${colors.accent};
       }
     }
   }
@@ -31,7 +33,7 @@ export const StyledCartProduct = styled.li`
     display: flex;
     align-items: center;
     column-gap: 15px;
-    color: ${variables.colors.accent};
+    color: ${colors.accent};
   }
 
   .price {

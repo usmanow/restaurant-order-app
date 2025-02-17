@@ -17,11 +17,13 @@ import { getProducts } from '../../api/products/index'
 import { useAuthContext } from '../../context/authContext'
 import showNotification from '../../components/Notification/notification-emitter'
 import { ERROR_NOTIFICATION } from '../../components/Notification/notification-type'
+import { getIsCartLoading } from '../../store/cartSlice'
 
 const Main = ({ searchValue, page }) => {
   const products = useSelector(getProductsSelector)
   const totalProducts = useSelector(getTotalProducts)
   const isLoading = useSelector(getIsProductsLoading)
+  const isLoadingCart = useSelector(getIsCartLoading)
   const dispatch = useDispatch()
 
   const [isFirstLoad, setIsFirstLoad] = useState(true)
@@ -54,7 +56,7 @@ const Main = ({ searchValue, page }) => {
   return (
     <StyledMain>
       <div className="inner container">
-        {isLoading && <Loader />}
+        {isLoading && isLoadingCart && <Loader />}
 
         {!isLoading && !isFirstLoad && !products.length && (
             <p className="no-results">Нет результатов</p>

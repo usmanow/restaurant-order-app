@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { getIsCartLoading, setCart, setIsCartLoading } from '../../store/cartSlice'
+import { getIsCardInCart, getIsCartLoading, setCart, setIsCartLoading } from '../../store/cartSlice'
 import CartActionButton from '../../ui/CartActionButton/CartActionButton'
 import { StyledCard } from './Card.styled'
 import { addProductToCart, getCart } from '../../api/cart'
@@ -7,11 +7,13 @@ import { getUserInfo } from '../../store/usersSlice'
 import showNotification from '../Notification/notification-emitter'
 import { ERROR_NOTIFICATION } from '../Notification/notification-type'
 import Loader from '../Loader/Loader'
+import Counter from '../../ui/Counter/Counter'
 
 const Card = ({ id, title, preview, description, price }) => {
   const dispatch = useDispatch()
   const { id: userId } = useSelector(getUserInfo)
   const isLoading = useSelector(getIsCartLoading)
+  const isCartInCart = useSelector((getIsCardInCart(id)))
 
   const updateCart = async () => {
     dispatch(setIsCartLoading(true))
@@ -47,7 +49,14 @@ const Card = ({ id, title, preview, description, price }) => {
       <div className="purchase">
         <span className="price">{price} ₽</span>
 
-        <CartActionButton onClick={handleButtonClick} />
+        {isCartInCart
+          ? <Counter
+              productId={id}
+              isCart={false}
+            />
+          : <CartActionButton
+              onClick={handleButtonClick}
+            />}
 
       </div>
     </StyledCard>

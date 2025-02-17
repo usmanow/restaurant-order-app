@@ -36,7 +36,6 @@ const CartPage = () => {
             <p className="no-results">Корзина пуста</p>
           )}
 
-
           <ul className='product-list'>
             {productList.map((product) => (
               <CartProduct
@@ -48,6 +47,7 @@ const CartPage = () => {
               />
             ))}
           </ul>
+
         </div>
       </StyledMain>
 

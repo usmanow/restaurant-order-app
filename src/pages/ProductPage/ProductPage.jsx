@@ -9,12 +9,21 @@ import { StyledProductPageWrapper } from './ProductPage.styled'
 import { StyledProductInfo } from './ProductPage.styled'
 import showNotification from '../../components/Notification/notification-emitter'
 import { ERROR_NOTIFICATION } from '../../components/Notification/notification-type'
+import { getIsCardInCart, setCart, setIsCartLoading } from '../../store/cartSlice'
+import { addProductToCart, getCart } from '../../api/cart'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUserInfo } from '../../store/usersSlice'
+import Counter from '../../ui/Counter/Counter'
 
 const ProductPage = () => {
   const [isLoading , setLoading] = useState(false)
   const [product, setProduct] = useState(null)
   const { goodId: productId } = useParams()
   const { token } = useAuthContext()
+
+  const { id: userId } = useSelector(getUserInfo)
+  const isCartInCart = useSelector((getIsCardInCart(Number(productId))))
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -32,6 +41,21 @@ const ProductPage = () => {
 
     fetchProduct()
   }, [productId, token])
+
+
+  const updateCart = async () => {
+    dispatch(setIsCartLoading(true))
+
+    try {
+      await addProductToCart(userId, productId)
+      const cart = await getCart(userId)
+      dispatch(setCart(cart))
+    } catch (error) {
+      showNotification(error.response?.data?.message, ERROR_NOTIFICATION)
+    } finally {
+      dispatch(setIsCartLoading(false))
+    }
+  }
 
   return (
     <StyledProductPageWrapper>
@@ -58,12 +82,18 @@ const ProductPage = () => {
 
                 <div className="purchase">
                   <span className="price">{product.price} ₽</span>
-                  <Button
-                    children='В корзину'
-                    buttonType='placeOrder'
-                    type='submit'
-                    onClick={() => console.log('товар добавлен в корзину')}
-                  />
+
+                  {isCartInCart ? (
+                    <Counter isCart={false} productId={productId} />
+                  ) : (
+                    <Button
+                      children="В корзину"
+                      buttonType="placeOrder"
+                      type="submit"
+                      onClick={updateCart}
+                    />
+                  )}
+
                 </div>
               </div>
             </div>

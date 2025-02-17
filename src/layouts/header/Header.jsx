@@ -4,6 +4,8 @@ import Button from '../../ui/Button/Button'
 import CartButton from '../../ui/CartButton/CartButton'
 import { StyledHeader } from './Header.styled'
 import { useAuthContext } from '../../context/authContext'
+import { useSelector } from 'react-redux'
+import { getTotalPrice, getTotalProductsAmount } from '../../store/cartSlice'
 
 const Header = ({
   showArrow,
@@ -12,12 +14,12 @@ const Header = ({
   showInput,
   searchValue,
   onSearchChange,
-  totalQuantity = 0,
-  totalPrice = 0,
   isNarrow
 }) => {
   const navigate = useNavigate()
   const { logOut } = useAuthContext()
+  const totalAmount = useSelector(getTotalProductsAmount)
+  const totalPrice = useSelector(getTotalPrice)
 
   return (
     <StyledHeader $backgroundColor={backgroundColor}>
@@ -49,12 +51,14 @@ const Header = ({
 
         <div className="controls">
           <div className="order-info">
-            <span className="product-quantity">{totalQuantity} товара</span>
-            <span className="total-price">на сумму {totalPrice} ₽</span>
+            <span className="product-quantity">{totalAmount} товара</span>
+            <span className="total-price">
+              на сумму <span className='price'>{totalPrice}</span>
+            </span>
           </div>
 
           <Link to='/cart'>
-            <CartButton totalQuantity={totalQuantity} />
+            <CartButton totalQuantity={totalAmount} />
           </Link>
 
           <Button
