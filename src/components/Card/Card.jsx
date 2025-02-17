@@ -36,7 +36,8 @@ const Card = ({ id, title, preview, description, price }) => {
 
   return (
     <StyledCard>
-      {isLoading ? <Loader /> : null}
+      {isLoading && <Loader />}
+
       <img
         className="image"
         src={preview}

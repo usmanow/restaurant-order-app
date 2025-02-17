@@ -74,6 +74,7 @@ const ProductPage = () => {
         <div className="inner container">
 
           {isLoading && <Loader />}
+          {isCartLoading && <Loader />}
 
           {!isLoading && product && (
             <div className="product">
@@ -86,18 +87,16 @@ const ProductPage = () => {
                 <div className="purchase">
                   <span className="price">{product.price} ₽</span>
 
-                  {isCartLoading ? (
-                      <Loader />
-                    ) : isCartInCart ? (
+                  {isCartInCart ? (
                       <Counter isCart={false} productId={productId} />
-                    ) : (
-                      <Button
-                        children="В корзину"
-                        buttonType="placeOrder"
-                        type="submit"
-                        onClick={updateCart}
-                      />
-                    )}
+                  ) : (
+                    <Button
+                      children="В корзину"
+                      buttonType="placeOrder"
+                      type="submit"
+                      onClick={updateCart}
+                    />
+                  )}
 
                 </div>
               </div>
