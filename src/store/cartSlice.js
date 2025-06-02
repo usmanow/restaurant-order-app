@@ -21,9 +21,7 @@ const cartSlice = createSlice({
 export const getCartSelector = (state) => state.cart.list
 export const getIsCartLoading = (state) => state.cart.isLoading
 
-export const getIsCardInCart = (id) => (state) => {
-  return state.cart.list.some(product => product.id === id)
-}
+export const getIsCardInCart = (id) => (state) => state.cart.list.some(product => product.id === id)
 
 export const getProductAmount = (id) => (state) => state.cart.list.find(product =>  product.id === id).amount
 
